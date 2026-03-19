@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Dépannage – Dépannage & Remorquage | Pech & Takeldienst</title>
+  <meta name="description" content="Alpha Dépannage – Service de dépannage et remorquage 24h/24 à Sint-Pieters-Leeuw. Snel pech- en takeldienst 24u/24." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --red:    #CC1010;
+      --red-dk: #A80D0D;
+      --yellow: #F5C400;
+      --dark:   #1A2535;
+      --dark2:  #243044;
+      --light:  #F8F7F5;
+      --gray:   #6B7280;
+      --white:  #ffffff;
+      --radius: 8px;
+      --shadow: 0 4px 24px rgba(0,0,0,.12);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: var(--white); }
+    img  { max-width: 100%; display: block; }
+    a    { text-decoration: none; color: inherit; }
+    ul   { list-style: none; }
+
+    /* ── Typography ── */
+    h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+    h3 { font-size: 1.15rem; }
+
+    /* ── Utilities ── */
+    .container  { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    .section    { padding: 80px 0; }
+    .section-alt { background: var(--light); }
+    .tag        { display: inline-block; background: var(--yellow); color: var(--dark); font-family: 'Montserrat',sans-serif;
+                  font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+                  padding: 4px 12px; border-radius: 4px; margin-bottom: 12px; }
+    .btn        { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+                  border-radius: var(--radius); font-family: 'Montserrat',sans-serif; font-weight: 700;
+                  font-size: .95rem; cursor: pointer; border: none; transition: transform .15s, box-shadow .15s; }
+    .btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+    .btn-red    { background: var(--red); color: var(--white); }
+    .btn-red:hover { background: var(--red-dk); }
+    .btn-outline{ background: transparent; color: var(--white); border: 2px solid var(--white); }
+    .btn-outline:hover { background: var(--white); color: var(--dark); }
+    .center     { text-align: center; }
+    .hidden     { display: none !important; }
+
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--dark);
+      color: var(--white);
+      font-size: .82rem;
+      padding: 8px 0;
+    }
+    .topbar .container {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .topbar a { color: var(--yellow); font-weight: 600; }
+    .topbar a:hover { text-decoration: underline; }
+    .topbar-info { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+    .topbar-info span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── Language switcher ── */
+    .lang-switcher { display: flex; gap: 6px; }
+    .lang-btn {
+      padding: 4px 10px; border-radius: 4px; font-family: 'Montserrat',sans-serif;
+      font-weight: 700; font-size: .78rem; cursor: pointer; border: 1px solid rgba(255,255,255,.3);
+      background: transparent; color: var(--white); transition: all .15s;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--yellow); color: var(--dark); border-color: var(--yellow);
+    }
+
+    /* ── Header / Nav ── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,.1);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; max-width: 1160px; margin: 0 auto;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 56px; width: 56px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Montserrat',sans-serif; }
+    .nav-logo-text .name { font-size: 1.2rem; font-weight: 900; color: var(--red); letter-spacing: -.5px; }
+    .nav-logo-text .sub  { font-size: .7rem; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      font-family: 'Montserrat',sans-serif; font-weight: 600; font-size: .88rem;
+      color: var(--dark); transition: color .15s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: -3px; width: 0; height: 2px;
+      background: var(--red); transition: width .2s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta { background: var(--red); color: var(--white) !important; padding: 10px 18px;
+               border-radius: var(--radius); font-size: .85rem !important; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--red-dk); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all .3s; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: 88vh;
+      display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('WhatsApp Image 2026-03-19 at ww09.09.29.jpeg') center/cover no-repeat;
+      opacity: .28;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 680px; padding: 60px 20px;
+      margin: 0 auto 0 10%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow); color: var(--dark);
+      font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: .78rem;
+      padding: 6px 16px; border-radius: 24px; margin-bottom: 20px;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .hero-badge .dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; animation: pulse 1.4s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    .hero h1 {
+      color: var(--white); font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.1; margin-bottom: 20px; font-weight: 900;
+    }
+    .hero h1 span { color: var(--yellow); }
+    .hero p { color: rgba(255,255,255,.82); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-phone-link { display: inline-flex; align-items: center; gap: 8px; }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      color: rgba(255,255,255,.5); font-size: .7rem; font-family: 'Montserrat',sans-serif;
+    }
+    .scroll-indicator .arrow { width: 20px; height: 20px; border-right: 2px solid rgba(255,255,255,.4);
+      border-bottom: 2px solid rgba(255,255,255,.4); transform: rotate(45deg); animation: bounce 1.6s infinite; }
+    @keyframes bounce { 0%,100%{transform:rotate(45deg) translate(0,0)} 50%{transform:rotate(45deg) translate(4px,4px)} }
+
+    /* ── Stats strip ── */
+    .stats {
+      background: var(--red);
+      padding: 32px 0;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; text-align: center;
+    }
+    .stat-item { color: var(--white); }
+    .stat-num  { font-family: 'Montserrat',sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; line-height: 1; }
+    .stat-num span { color: var(--yellow); }
+    .stat-lbl  { font-size: .82rem; opacity: .85; margin-top: 4px; }
+
+    /* ── Services ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .service-card {
+      background: var(--white); border-radius: 12px; padding: 32px 24px;
+      box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s;
+      border-top: 4px solid var(--red);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,.15); }
+    .service-icon {
+      width: 56px; height: 56px; background: rgba(204,16,16,.1); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 18px;
+    }
+    .service-card h3 { color: var(--dark); margin-bottom: 10px; }
+    .service-card p  { color: var(--gray); font-size: .9rem; line-height: 1.6; }
+
+    /* ── Gallery ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .gallery-item {
+      overflow: hidden; border-radius: 12px; position: relative;
+      box-shadow: var(--shadow); cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%; height: 320px; object-fit: cover;
+      transition: transform .4s;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.wide img { height: 420px; }
+    .gallery-overlay {
+      position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,37,53,.7) 0%, transparent 60%);
+      display: flex; align-items: flex-end; padding: 20px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: var(--white); font-family: 'Montserrat',sans-serif; font-weight: 600; font-size: .9rem; }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .about-img {
+      border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); position: relative;
+    }
+    .about-img img { width: 100%; height: 480px; object-fit: cover; }
+    .about-img-badge {
+      position: absolute; bottom: 24px; left: 24px;
+      background: var(--red); color: var(--white);
+      font-family: 'Montserrat',sans-serif; font-weight: 700;
+      padding: 12px 20px; border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(204,16,16,.4);
+    }
+    .about-img-badge .big { font-size: 1.5rem; font-weight: 900; }
+    .about-img-badge .sm  { font-size: .75rem; opacity: .85; }
+    .about-content h2 { margin-bottom: 16px; }
+    .about-content p  { color: var(--gray); line-height: 1.8; margin-bottom: 18px; }
+    .check-list { margin: 24px 0; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.07); color: var(--dark);
+      font-size: .95rem;
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-icon { color: var(--red); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px;
+    }
+    .contact-card {
+      background: var(--white); border-radius: 12px; padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .contact-card h3 { margin-bottom: 24px; }
+    .contact-info-item {
+      display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;
+    }
+    .contact-icon {
+      width: 44px; height: 44px; background: rgba(204,16,16,.1); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-info-item .label { font-size: .75rem; color: var(--gray); text-transform: uppercase;
+      font-family: 'Montserrat',sans-serif; font-weight: 600; letter-spacing: .06em; margin-bottom: 4px; }
+    .contact-info-item .value { font-weight: 600; color: var(--dark); }
+    .contact-info-item .value a { color: var(--red); }
+    .contact-info-item .value a:hover { text-decoration: underline; }
+
+    .map-container {
+      border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); height: 100%; min-height: 300px;
+    }
+    .map-container iframe { width: 100%; height: 100%; min-height: 300px; border: none; display: block; }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+      padding: 64px 0;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: rgba(245,196,0,.08);
+    }
+    .cta-banner::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -40px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(204,16,16,.08);
+    }
+    .cta-banner h2 { color: var(--white); margin-bottom: 12px; }
+    .cta-banner p  { color: rgba(255,255,255,.75); margin-bottom: 32px; font-size: 1.05rem; }
+    .cta-phone {
+      font-family: 'Montserrat',sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.2rem); color: var(--yellow);
+      letter-spacing: -.5px; display: block; margin-bottom: 24px;
+    }
+    .cta-phone a { color: inherit; }
+    .cta-phone a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.65);
+      padding: 48px 0 24px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .footer-logo img { height: 48px; width: 48px; object-fit: contain; }
+    .footer-logo .name { font-family: 'Montserrat',sans-serif; font-weight: 900; font-size: 1.1rem; color: var(--white); }
+    .footer-logo .sub  { font-size: .68rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .08em; }
+    .footer-desc { font-size: .88rem; line-height: 1.7; }
+    .footer-col h4 { color: var(--white); font-family: 'Montserrat',sans-serif; font-size: .85rem;
+                      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+    .footer-col ul li { margin-bottom: 8px; font-size: .88rem; }
+    .footer-col ul li a { transition: color .15s; }
+    .footer-col ul li a:hover { color: var(--yellow); }
+    .footer-col .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: .88rem; }
+    .footer-contact-item .ico { color: var(--yellow); margin-top: 2px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      font-size: .8rem;
+    }
+    .footer-bottom a { color: var(--yellow); }
+
+    /* ── Floating phone button ── */
+    .float-call {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      background: var(--red); color: var(--white);
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; box-shadow: 0 6px 24px rgba(204,16,16,.5);
+      animation: float-pulse 2.5s infinite;
+      transition: transform .2s, background .2s;
+    }
+    .float-call:hover { transform: scale(1.12); background: var(--red-dk); }
+    @keyframes float-pulse {
+      0%,100% { box-shadow: 0 6px 24px rgba(204,16,16,.5); }
+      50%      { box-shadow: 0 6px 36px rgba(204,16,16,.8); }
+    }
+
+    /* ── Mobile nav overlay ── */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: var(--dark); flex-direction: column; align-items: center; justify-content: center;
+      gap: 32px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: 1.4rem;
+      color: var(--white); transition: color .15s;
+    }
+    .mobile-nav a:hover { color: var(--yellow); }
+    .mobile-close {
+      position: absolute; top: 20px; right: 20px;
+      font-size: 2rem; color: var(--white); cursor: pointer; background: none; border: none;
+    }
+    .mobile-lang { display: flex; gap: 10px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide { grid-column: span 1; }
+      .hero-content { margin: 0 auto; text-align: center; }
+      .hero-btns { justify-content: center; }
+      .stats-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .stats-grid { grid-template-columns: repeat(3,1fr); gap: 8px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .section { padding: 56px 0; }
+    }
+    @media (max-width: 420px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .topbar .container { justify-content: center; }
+      .topbar-info { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ TOP BAR ═══════════════ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-info">
+      <span>📍 Brusselbaan 126, 1600 Sint-Pieters-Leeuw</span>
+      <span>📞 <a href="tel:0477509327">0477 50 93 27</a></span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn"       onclick="setLang('nl')">NL</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="header">
+  <nav class="nav">
+    <a href="#" class="nav-logo">
+      <img src="logo.jpeg" alt="Alpha Dépannage logo" />
+      <div class="nav-logo-text">
+        <div class="name">Alpha Dépannage</div>
+        <div class="sub" data-fr="Dépannage & Remorquage" data-nl="Pech- & Takeldienst">Dépannage & Remorquage</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#services"  data-fr="Services"  data-nl="Diensten">Services</a>
+      <a href="#galerie"   data-fr="Galerie"   data-nl="Galerij">Galerie</a>
+      <a href="#a-propos"  data-fr="À propos"  data-nl="Over ons">À propos</a>
+      <a href="#contact"   data-fr="Contact"   data-nl="Contact">Contact</a>
+      <a href="tel:0477509327" class="nav-cta btn btn-red">📞 0477 50 93 27</a>
+    </div>
+    <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="toggleMobileNav()">✕</button>
+  <a href="#services"  onclick="toggleMobileNav()" data-fr="Services"  data-nl="Diensten">Services</a>
+  <a href="#galerie"   onclick="toggleMobileNav()" data-fr="Galerie"   data-nl="Galerij">Galerie</a>
+  <a href="#a-propos"  onclick="toggleMobileNav()" data-fr="À propos"  data-nl="Over ons">À propos</a>
+  <a href="#contact"   onclick="toggleMobileNav()" data-fr="Contact"   data-nl="Contact">Contact</a>
+  <a href="tel:0477509327">📞 0477 50 93 27</a>
+  <div class="mobile-lang">
+    <button class="lang-btn" onclick="setLang('fr');toggleMobileNav()">FR</button>
+    <button class="lang-btn" onclick="setLang('nl');toggleMobileNav()">NL</button>
+  </div>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span data-fr="Disponible 24h/24 – 7j/7" data-nl="Beschikbaar 24u/24 – 7d/7">Disponible 24h/24 – 7j/7</span>
+    </div>
+    <h1 data-fr="Dépannage rapide &amp; <span>fiable</span> en Belgique" data-nl="Snelle &amp; <span>betrouwbare</span> pechhulp in België">
+      Dépannage rapide &amp; <span>fiable</span> en Belgique
+    </h1>
+    <p data-fr="Vous êtes en panne ? Alpha Dépannage intervient rapidement, de jour comme de nuit, pour remorquer et dépanner votre véhicule en toute sécurité."
+       data-nl="Autopech? Alpha Dépannage komt snel ter plaatse, dag en nacht, om uw voertuig veilig te slepen en te herstellen.">
+      Vous êtes en panne ? Alpha Dépannage intervient rapidement, de jour comme de nuit, pour remorquer et dépanner votre véhicule en toute sécurité.
+    </p>
+    <div class="hero-btns">
+      <a href="tel:0477509327" class="btn btn-red" data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu">📞 Appeler maintenant</a>
+      <a href="#services"      class="btn btn-outline" data-fr="Nos services" data-nl="Onze diensten">Nos services</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ STATS ═══════════════ -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">24<span>/7</span></div>
+        <div class="stat-lbl" data-fr="Disponibilité" data-nl="Beschikbaarheid">Disponibilité</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>~</span>30<span>min</span></div>
+        <div class="stat-lbl" data-fr="Délai d'intervention" data-nl="Reactietijd">Délai d'intervention</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-lbl" data-fr="Satisfaction client" data-nl="Klanttevredenheid">Satisfaction client</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="center">
+      <span class="tag" data-fr="Nos services" data-nl="Onze diensten">Nos services</span>
+      <h2 data-fr="Ce que nous proposons" data-nl="Wat wij aanbieden">Ce que nous proposons</h2>
+      <p style="color:var(--gray);max-width:560px;margin:12px auto 0;line-height:1.7;"
+         data-fr="Nous prenons en charge tous types de véhicules – voitures, camionnettes, utilitaires – avec professionnalisme et réactivité."
+         data-nl="Wij nemen alle soorten voertuigen op sleeptouw – personenwagens, bestelwagens, lichte vrachtwagens – met vakmanschap en snelle respons.">
+        Nous prenons en charge tous types de véhicules – voitures, camionnettes, utilitaires – avec professionnalisme et réactivité.
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🚗</div>
+        <h3 data-fr="Remorquage & dépannage" data-nl="Slepen & takelen">Remorquage & dépannage</h3>
+        <p data-fr="Prise en charge rapide de votre véhicule en panne, accident ou immobilisé, vers le garage de votre choix."
+           data-nl="Snelle opname van uw voertuig bij pech, ongeval of immobilisatie, naar de garage van uw keuze.">
+          Prise en charge rapide de votre véhicule en panne, accident ou immobilisé, vers le garage de votre choix.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3 data-fr="Intervention sur place" data-nl="Interventie ter plaatse">Intervention sur place</h3>
+        <p data-fr="Diagnostic et réparation sur place pour les pannes courantes : batterie, crevaison, démarrage, carburant, etc."
+           data-nl="Diagnose en herstelling ter plaatse voor veelvoorkomende pannes: accu, lekke band, starten, brandstof, enz.">
+          Diagnostic et réparation sur place pour les pannes courantes : batterie, crevaison, démarrage, carburant, etc.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🚐</div>
+        <h3 data-fr="Véhicules utilitaires" data-nl="Bestelwagens & lichte vracht">Véhicules utilitaires</h3>
+        <p data-fr="Équipés pour prendre en charge camionnettes et utilitaires lourds avec notre matériel adapté."
+           data-nl="Uitgerust om bestelwagens en lichte vrachtwagens te takelen met aangepast materieel.">
+          Équipés pour prendre en charge camionnettes et utilitaires lourds avec notre matériel adapté.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌙</div>
+        <h3 data-fr="Service 24h/24 – 7j/7" data-nl="Dienst 24u/24 – 7d/7">Service 24h/24 – 7j/7</h3>
+        <p data-fr="Une urgence ne prévient pas. Nous intervenons à toute heure, y compris les nuits, week-ends et jours fériés."
+           data-nl="Een noodgeval kondigt zich niet aan. Wij komen op elk uur, ook 's nachts, in het weekend en op feestdagen.">
+          Une urgence ne prévient pas. Nous intervenons à toute heure, y compris les nuits, week-ends et jours fériés.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🅿️</div>
+        <h3 data-fr="Enlèvement de véhicule" data-nl="Voertuig verwijdering">Enlèvement de véhicule</h3>
+        <p data-fr="Enlèvement de véhicules gênants, épaves ou voitures non conformes sur votre propriété ou espace commun."
+           data-nl="Verwijdering van hinderlijke voertuigen, wrakken of niet-conforme wagens op uw eigendom of gemeenschappelijke ruimte.">
+          Enlèvement de véhicules gênants, épaves ou voitures non conformes sur votre propriété ou espace commun.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📍</div>
+        <h3 data-fr="Zone de couverture large" data-nl="Ruim werkgebied">Zone de couverture large</h3>
+        <p data-fr="Basés à Sint-Pieters-Leeuw, nous intervenons dans tout Bruxelles et sa périphérie rapidement et efficacement."
+           data-nl="Gevestigd in Sint-Pieters-Leeuw, actief in heel Brussel en de rand, snel en efficiënt.">
+          Basés à Sint-Pieters-Leeuw, nous intervenons dans tout Bruxelles et sa périphérie rapidement et efficacement.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<section class="section section-alt" id="galerie">
+  <div class="container">
+    <div class="center">
+      <span class="tag" data-fr="Galerie" data-nl="Galerij">Galerie</span>
+      <h2 data-fr="Nos interventions en images" data-nl="Onze interventies in beeld">Nos interventions en images</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide">
+        <img src="WhatsApp Image 2026-03-19 at 09.09.jpeg"
+             alt="Camion de dépannage Alpha Dépannage remorquant un utilitaire" loading="lazy" />
+        <div class="gallery-overlay">
+          <span data-fr="Remorquage camionnette – Bruxelles" data-nl="Bestelwagen slepen – Brussel">Remorquage camionnette – Bruxelles</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="WhatsApp Image 2026-03-19 at 09.09.29.jpeg"
+             alt="Intervention de nuit – Alpha Dépannage" loading="lazy" />
+        <div class="gallery-overlay">
+          <span data-fr="Intervention de nuit" data-nl="Nachtelijke interventie">Intervention de nuit</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="WhatsApp Image 2026-03-19 at 09www.09.29.jpeg"
+             alt="Remorquage voiture en ville" loading="lazy" />
+        <div class="gallery-overlay">
+          <span data-fr="Remorquage en centre-ville" data-nl="Slepen in stadscentrum">Remorquage en centre-ville</span>
+        </div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="WhatsApp Image 2026-03-19 at ww09.09.29.jpeg"
+             alt="Dépannage nuit hivernale" loading="lazy" />
+        <div class="gallery-overlay">
+          <span data-fr="Intervention par conditions hivernales" data-nl="Interventie bij winteromstandigheden">Intervention par conditions hivernales</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="section" id="a-propos">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="WhatsApp Image 2026-03-19 at 09.09.jpeg" alt="Camion Alpha Dépannage" loading="lazy" />
+        <div class="about-img-badge">
+          <div class="big">24/7</div>
+          <div class="sm" data-fr="À votre service" data-nl="Voor u klaar">À votre service</div>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="tag" data-fr="À propos de nous" data-nl="Over ons">À propos de nous</span>
+        <h2 data-fr="Votre partenaire de confiance en cas de panne" data-nl="Uw vertrouwde partner bij autopech">
+          Votre partenaire de confiance en cas de panne
+        </h2>
+        <p data-fr="Alpha Dépannage est une société spécialisée dans le dépannage et le remorquage de véhicules, basée à Sint-Pieters-Leeuw. Grâce à notre équipement moderne et notre équipe expérimentée, nous intervenons partout à Bruxelles et dans sa périphérie."
+           data-nl="Alpha Dépannage is een gespecialiseerd bedrijf in pech- en takelhulp voor voertuigen, gevestigd in Sint-Pieters-Leeuw. Met onze moderne uitrusting en ervaren team zijn wij actief in heel Brussel en omgeving.">
+          Alpha Dépannage est une société spécialisée dans le dépannage et le remorquage de véhicules, basée à Sint-Pieters-Leeuw. Grâce à notre équipement moderne et notre équipe expérimentée, nous intervenons partout à Bruxelles et dans sa périphérie.
+        </p>
+        <p data-fr="Notre priorité : votre sécurité et votre tranquillité d'esprit, 7 jours sur 7, 24 heures sur 24."
+           data-nl="Onze prioriteit: uw veiligheid en gemoedsrust, 7 dagen op 7, 24 uur op 24.">
+          Notre priorité : votre sécurité et votre tranquillité d'esprit, 7 jours sur 7, 24 heures sur 24.
+        </p>
+        <ul class="check-list">
+          <li>
+            <span class="check-icon">✔</span>
+            <span data-fr="Matériel professionnel et moderne" data-nl="Professioneel en modern materieel">Matériel professionnel et moderne</span>
+          </li>
+          <li>
+            <span class="check-icon">✔</span>
+            <span data-fr="Équipe expérimentée et qualifiée" data-nl="Ervaren en gekwalificeerd team">Équipe expérimentée et qualifiée</span>
+          </li>
+          <li>
+            <span class="check-icon">✔</span>
+            <span data-fr="Intervention rapide (~30 min)" data-nl="Snelle interventie (~30 min)">Intervention rapide (~30 min)</span>
+          </li>
+          <li>
+            <span class="check-icon">✔</span>
+            <span data-fr="Tous types de véhicules acceptés" data-nl="Alle soorten voertuigen aanvaard">Tous types de véhicules acceptés</span>
+          </li>
+          <li>
+            <span class="check-icon">✔</span>
+            <span data-fr="Disponible nuits, week-ends & fériés" data-nl="Beschikbaar 's nachts, weekends & feestdagen">Disponible nuits, week-ends & fériés</span>
+          </li>
+        </ul>
+        <a href="tel:0477509327" class="btn btn-red" data-fr="📞 Nous contacter" data-nl="📞 Neem contact op">📞 Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<div class="cta-banner">
+  <div class="container" style="position:relative;z-index:1;">
+    <h2 data-fr="Besoin d'aide ? Appelez-nous maintenant !" data-nl="Hulp nodig? Bel ons nu!">Besoin d'aide ? Appelez-nous maintenant !</h2>
+    <p data-fr="Nous sommes disponibles 24h/24, 7j/7. Une équipe prête à intervenir en 30 minutes."
+       data-nl="Wij zijn beschikbaar 24u/24, 7d/7. Een team klaar om binnen 30 minuten ter plaatse te zijn.">
+      Nous sommes disponibles 24h/24, 7j/7. Une équipe prête à intervenir en 30 minutes.
+    </p>
+    <span class="cta-phone"><a href="tel:0477509327">0477 50 93 27</a></span>
+    <a href="tel:0477509327" class="btn btn-red" style="font-size:1rem;"
+       data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu">📞 Appeler maintenant</a>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="center">
+      <span class="tag" data-fr="Contact" data-nl="Contact">Contact</span>
+      <h2 data-fr="Nous trouver & nous contacter" data-nl="Ons vinden & contacteren">Nous trouver & nous contacter</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3 data-fr="Informations de contact" data-nl="Contactgegevens">Informations de contact</h3>
+
+        <div class="contact-info-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="label" data-fr="Téléphone" data-nl="Telefoon">Téléphone</div>
+            <div class="value"><a href="tel:0477509327">0477 50 93 27</a></div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="label" data-fr="Adresse" data-nl="Adres">Adresse</div>
+            <div class="value">Brusselbaan 126<br>1600 Sint-Pieters-Leeuw</div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="label" data-fr="Horaires" data-nl="Openingstijden">Horaires</div>
+            <div class="value" data-fr="7j/7 – 24h/24" data-nl="7d/7 – 24u/24">7j/7 – 24h/24</div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon">🚗</div>
+          <div>
+            <div class="label" data-fr="Zone d'intervention" data-nl="Werkgebied">Zone d'intervention</div>
+            <div class="value" data-fr="Bruxelles & périphérie" data-nl="Brussel & rand">Bruxelles & périphérie</div>
+          </div>
+        </div>
+
+        <a href="tel:0477509327" class="btn btn-red" style="width:100%;justify-content:center;margin-top:8px;"
+           data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu">📞 Appeler maintenant</a>
+      </div>
+
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.9!2d4.2598!3d50.7693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c8c5c5c5c5c5%3A0x0!2sBrusselban+126%2C+1600+Sint-Pieters-Leeuw!5e0!3m2!1sfr!2sbe!4v1700000000000!5m2!1sfr!2sbe"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Alpha Dépannage – Brusselbaan 126, 1600 Sint-Pieters-Leeuw">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="logo.jpeg" alt="Alpha Dépannage logo" />
+          <div>
+            <div class="name">Alpha Dépannage</div>
+            <div class="sub" data-fr="Dépannage & Remorquage" data-nl="Pech- & Takeldienst">Dépannage & Remorquage</div>
+          </div>
+        </div>
+        <p class="footer-desc"
+           data-fr="Service de dépannage et remorquage professionnel, disponible 24h/24 et 7j/7 à Bruxelles et en périphérie."
+           data-nl="Professionele pech- en takeldienst, beschikbaar 24u/24 en 7d/7 in Brussel en omgeving.">
+          Service de dépannage et remorquage professionnel, disponible 24h/24 et 7j/7 à Bruxelles et en périphérie.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-fr="Navigation" data-nl="Navigatie">Navigation</h4>
+        <ul>
+          <li><a href="#services" data-fr="Services"  data-nl="Diensten">Services</a></li>
+          <li><a href="#galerie"  data-fr="Galerie"   data-nl="Galerij">Galerie</a></li>
+          <li><a href="#a-propos" data-fr="À propos"  data-nl="Over ons">À propos</a></li>
+          <li><a href="#contact"  data-fr="Contact"   data-nl="Contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-fr="Contact" data-nl="Contact">Contact</h4>
+        <div class="footer-contact-item">
+          <span class="ico">📞</span>
+          <a href="tel:0477509327" style="color:var(--yellow);">0477 50 93 27</a>
+        </div>
+        <div class="footer-contact-item">
+          <span class="ico">📍</span>
+          <span>Brusselbaan 126<br>1600 Sint-Pieters-Leeuw</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="ico">🕐</span>
+          <span data-fr="Disponible 24h/24 – 7j/7" data-nl="Beschikbaar 24u/24 – 7d/7">Disponible 24h/24 – 7j/7</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-fr="© 2026 Alpha Dépannage – Tous droits réservés" data-nl="© 2026 Alpha Dépannage – Alle rechten voorbehouden">
+        © 2026 Alpha Dépannage – Tous droits réservés
+      </span>
+      <span data-fr="Brusselbaan 126, 1600 Sint-Pieters-Leeuw" data-nl="Brusselbaan 126, 1600 Sint-Pieters-Leeuw">
+        Brusselbaan 126, 1600 Sint-Pieters-Leeuw
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating call button -->
+<a href="tel:0477509327" class="float-call" title="Appeler Alpha Dépannage">📞</a>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+  /* ── Language switcher ── */
+  let currentLang = 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    // Update all elements with data-fr / data-nl
+    document.querySelectorAll('[data-fr],[data-nl]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) {
+        // Check if value contains HTML tags
+        if (/<[a-z][\s\S]*>/i.test(val)) {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
+      }
+    });
+
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+    });
+  }
+
+  /* ── Mobile nav ── */
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  /* ── Smooth reveal on scroll ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .gallery-item, .contact-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
