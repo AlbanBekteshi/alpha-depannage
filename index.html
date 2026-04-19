@@ -250,7 +250,7 @@
 
     /* ── Contact ── */
     .contact-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px;
+      display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 32px; margin-top: 48px; align-items: start;
     }
     .contact-card {
       background: var(--white); border-radius: 12px; padding: 32px;
@@ -272,9 +272,38 @@
     .contact-info-item .value a:hover { text-decoration: underline; }
 
     .map-container {
-      border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); height: 100%; min-height: 300px;
+      border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); min-height: 420px;
     }
-    .map-container iframe { width: 100%; height: 100%; min-height: 300px; border: none; display: block; }
+    .map-container iframe { width: 100%; height: 100%; min-height: 420px; border: none; display: block; }
+
+    /* ── Contact form ── */
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-family: 'Montserrat',sans-serif; font-weight: 600;
+      font-size: .78rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--gray); margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 14px; border: 1.5px solid #e2e5ea;
+      border-radius: var(--radius); font-family: 'Open Sans',sans-serif; font-size: .93rem;
+      color: var(--dark); background: var(--white); transition: border-color .2s, box-shadow .2s;
+      outline: none; resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--red); box-shadow: 0 0 0 3px rgba(204,16,16,.1);
+    }
+    .form-group textarea { min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit { width: 100%; justify-content: center; margin-top: 6px; font-size: .95rem; }
+    .form-status {
+      display: none; margin-top: 14px; padding: 12px 16px; border-radius: var(--radius);
+      font-family: 'Montserrat',sans-serif; font-size: .88rem; font-weight: 600; text-align: center;
+    }
+    .form-status.success { background: #d1fae5; color: #065f46; display: block; }
+    .form-status.error   { background: #fee2e2; color: #991b1b; display: block; }
 
     /* CTA Banner */
     .cta-banner {
@@ -370,6 +399,7 @@
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item.wide { grid-column: span 1; }
@@ -403,6 +433,7 @@
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('fr')">FR</button>
       <button class="lang-btn"       onclick="setLang('nl')">NL</button>
+      <button class="lang-btn"       onclick="setLang('en')">EN</button>
     </div>
   </div>
 </div>
@@ -414,14 +445,14 @@
       <img src="logo.jpeg" alt="Alpha Dépannage logo" />
       <div class="nav-logo-text">
         <div class="name">Alpha Dépannage</div>
-        <div class="sub" data-fr="Dépannage & Remorquage" data-nl="Pech- & Takeldienst">Dépannage & Remorquage</div>
+        <div class="sub" data-fr="Dépannage & Remorquage" data-nl="Pech- & Takeldienst" data-en="Breakdown & Recovery">Dépannage & Remorquage</div>
       </div>
     </a>
     <div class="nav-links">
-      <a href="#services"  data-fr="Services"  data-nl="Diensten">Services</a>
-      <a href="#galerie"   data-fr="Galerie"   data-nl="Galerij">Galerie</a>
-      <a href="#a-propos"  data-fr="À propos"  data-nl="Over ons">À propos</a>
-      <a href="#contact"   data-fr="Contact"   data-nl="Contact">Contact</a>
+      <a href="#services"  data-fr="Services"  data-nl="Diensten" data-en="Services">Services</a>
+      <a href="#galerie"   data-fr="Galerie"   data-nl="Galerij" data-en="Gallery">Galerie</a>
+      <a href="#a-propos"  data-fr="À propos"  data-nl="Over ons" data-en="About">À propos</a>
+      <a href="#contact"   data-fr="Contact"   data-nl="Contact" data-en="Contact">Contact</a>
       <a href="tel:0477509327" class="nav-cta btn btn-red">📞 0477 50 93 27</a>
     </div>
     <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
@@ -433,14 +464,15 @@
 <!-- Mobile nav -->
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-close" onclick="toggleMobileNav()">✕</button>
-  <a href="#services"  onclick="toggleMobileNav()" data-fr="Services"  data-nl="Diensten">Services</a>
-  <a href="#galerie"   onclick="toggleMobileNav()" data-fr="Galerie"   data-nl="Galerij">Galerie</a>
-  <a href="#a-propos"  onclick="toggleMobileNav()" data-fr="À propos"  data-nl="Over ons">À propos</a>
-  <a href="#contact"   onclick="toggleMobileNav()" data-fr="Contact"   data-nl="Contact">Contact</a>
+  <a href="#services"  onclick="toggleMobileNav()" data-fr="Services"  data-nl="Diensten" data-en="Services">Services</a>
+  <a href="#galerie"   onclick="toggleMobileNav()" data-fr="Galerie"   data-nl="Galerij" data-en="Gallery">Galerie</a>
+  <a href="#a-propos"  onclick="toggleMobileNav()" data-fr="À propos"  data-nl="Over ons" data-en="About">À propos</a>
+  <a href="#contact"   onclick="toggleMobileNav()" data-fr="Contact"   data-nl="Contact" data-en="Contact">Contact</a>
   <a href="tel:0477509327">📞 0477 50 93 27</a>
   <div class="mobile-lang">
     <button class="lang-btn" onclick="setLang('fr');toggleMobileNav()">FR</button>
     <button class="lang-btn" onclick="setLang('nl');toggleMobileNav()">NL</button>
+    <button class="lang-btn" onclick="setLang('en');toggleMobileNav()">EN</button>
   </div>
 </div>
 
@@ -450,18 +482,19 @@
   <div class="hero-content">
     <div class="hero-badge">
       <span class="dot"></span>
-      <span data-fr="Disponible 24h/24 – 7j/7" data-nl="Beschikbaar 24u/24 – 7d/7">Disponible 24h/24 – 7j/7</span>
+      <span data-fr="Disponible 24h/24 – 7j/7" data-nl="Beschikbaar 24u/24 – 7d/7" data-en="Available 24/7">Disponible 24h/24 – 7j/7</span>
     </div>
-    <h1 data-fr="Dépannage rapide &amp; <span>fiable</span> en Belgique" data-nl="Snelle &amp; <span>betrouwbare</span> pechhulp in België">
+    <h1 data-fr="Dépannage rapide &amp; <span>fiable</span> en Belgique" data-nl="Snelle &amp; <span>betrouwbare</span> pechhulp in België" data-en="Fast &amp; <span>reliable</span> breakdown service in Belgium">
       Dépannage rapide &amp; <span>fiable</span> en Belgique
     </h1>
     <p data-fr="Vous êtes en panne ? Alpha Dépannage intervient rapidement, de jour comme de nuit, pour remorquer et dépanner votre véhicule en toute sécurité."
-       data-nl="Autopech? Alpha Dépannage komt snel ter plaatse, dag en nacht, om uw voertuig veilig te slepen en te herstellen.">
+       data-nl="Autopech? Alpha Dépannage komt snel ter plaatse, dag en nacht, om uw voertuig veilig te slepen en te herstellen."
+       data-en="Broken down? Alpha Dépannage responds quickly, day and night, to tow and repair your vehicle safely.">
       Vous êtes en panne ? Alpha Dépannage intervient rapidement, de jour comme de nuit, pour remorquer et dépanner votre véhicule en toute sécurité.
     </p>
     <div class="hero-btns">
-      <a href="tel:0477509327" class="btn btn-red" data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu">📞 Appeler maintenant</a>
-      <a href="#services"      class="btn btn-outline" data-fr="Nos services" data-nl="Onze diensten">Nos services</a>
+      <a href="tel:0477509327" class="btn btn-red" data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu" data-en="📞 Call now">📞 Appeler maintenant</a>
+      <a href="#services"      class="btn btn-outline" data-fr="Nos services" data-nl="Onze diensten" data-en="Our services">Nos services</a>
     </div>
   </div>
   <div class="scroll-indicator">
@@ -475,15 +508,15 @@
     <div class="stats-grid">
       <div class="stat-item">
         <div class="stat-num">24<span>/7</span></div>
-        <div class="stat-lbl" data-fr="Disponibilité" data-nl="Beschikbaarheid">Disponibilité</div>
+        <div class="stat-lbl" data-fr="Disponibilité" data-nl="Beschikbaarheid" data-en="Availability">Disponibilité</div>
       </div>
       <div class="stat-item">
         <div class="stat-num"><span>~</span>30<span>min</span></div>
-        <div class="stat-lbl" data-fr="Délai d'intervention" data-nl="Reactietijd">Délai d'intervention</div>
+        <div class="stat-lbl" data-fr="Délai d'intervention" data-nl="Reactietijd" data-en="Response time">Délai d'intervention</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">100<span>%</span></div>
-        <div class="stat-lbl" data-fr="Satisfaction client" data-nl="Klanttevredenheid">Satisfaction client</div>
+        <div class="stat-lbl" data-fr="Satisfaction client" data-nl="Klanttevredenheid" data-en="Customer satisfaction">Satisfaction client</div>
       </div>
     </div>
   </div>
@@ -493,11 +526,12 @@
 <section class="section" id="services">
   <div class="container">
     <div class="center">
-      <span class="tag" data-fr="Nos services" data-nl="Onze diensten">Nos services</span>
-      <h2 data-fr="Ce que nous proposons" data-nl="Wat wij aanbieden">Ce que nous proposons</h2>
+      <span class="tag" data-fr="Nos services" data-nl="Onze diensten" data-en="Our services">Nos services</span>
+      <h2 data-fr="Ce que nous proposons" data-nl="Wat wij aanbieden" data-en="What we offer">Ce que nous proposons</h2>
       <p style="color:var(--gray);max-width:560px;margin:12px auto 0;line-height:1.7;"
          data-fr="Nous prenons en charge tous types de véhicules – voitures, camionnettes, utilitaires – avec professionnalisme et réactivité."
-         data-nl="Wij nemen alle soorten voertuigen op sleeptouw – personenwagens, bestelwagens, lichte vrachtwagens – met vakmanschap en snelle respons.">
+         data-nl="Wij nemen alle soorten voertuigen op sleeptouw – personenwagens, bestelwagens, lichte vrachtwagens – met vakmanschap en snelle respons."
+         data-en="We handle all types of vehicles – cars, vans, light commercial – with professionalism and fast response.">
         Nous prenons en charge tous types de véhicules – voitures, camionnettes, utilitaires – avec professionnalisme et réactivité.
       </p>
     </div>
@@ -505,54 +539,60 @@
 
       <div class="service-card">
         <div class="service-icon">🚗</div>
-        <h3 data-fr="Remorquage & dépannage" data-nl="Slepen & takelen">Remorquage & dépannage</h3>
+        <h3 data-fr="Remorquage & dépannage" data-nl="Slepen & takelen" data-en="Towing & breakdown">Remorquage & dépannage</h3>
         <p data-fr="Prise en charge rapide de votre véhicule en panne, accident ou immobilisé, vers le garage de votre choix."
-           data-nl="Snelle opname van uw voertuig bij pech, ongeval of immobilisatie, naar de garage van uw keuze.">
+           data-nl="Snelle opname van uw voertuig bij pech, ongeval of immobilisatie, naar de garage van uw keuze."
+           data-en="Fast pickup of your broken-down, accident-damaged or immobilised vehicle, to the garage of your choice.">
           Prise en charge rapide de votre véhicule en panne, accident ou immobilisé, vers le garage de votre choix.
         </p>
       </div>
 
       <div class="service-card">
         <div class="service-icon">🔧</div>
-        <h3 data-fr="Intervention sur place" data-nl="Interventie ter plaatse">Intervention sur place</h3>
+        <h3 data-fr="Intervention sur place" data-nl="Interventie ter plaatse" data-en="On-site assistance">Intervention sur place</h3>
         <p data-fr="Diagnostic et réparation sur place pour les pannes courantes : batterie, crevaison, démarrage, carburant, etc."
-           data-nl="Diagnose en herstelling ter plaatse voor veelvoorkomende pannes: accu, lekke band, starten, brandstof, enz.">
+           data-nl="Diagnose en herstelling ter plaatse voor veelvoorkomende pannes: accu, lekke band, starten, brandstof, enz."
+           data-en="On-site diagnosis and repair for common breakdowns: battery, flat tyre, starting, fuel, etc.">
           Diagnostic et réparation sur place pour les pannes courantes : batterie, crevaison, démarrage, carburant, etc.
         </p>
       </div>
 
       <div class="service-card">
         <div class="service-icon">🚐</div>
-        <h3 data-fr="Véhicules utilitaires" data-nl="Bestelwagens & lichte vracht">Véhicules utilitaires</h3>
+        <h3 data-fr="Véhicules utilitaires" data-nl="Bestelwagens & lichte vracht" data-en="Vans & light commercial">Véhicules utilitaires</h3>
         <p data-fr="Équipés pour prendre en charge camionnettes et utilitaires lourds avec notre matériel adapté."
-           data-nl="Uitgerust om bestelwagens en lichte vrachtwagens te takelen met aangepast materieel.">
+           data-nl="Uitgerust om bestelwagens en lichte vrachtwagens te takelen met aangepast materieel."
+           data-en="Equipped to handle vans and light commercial vehicles with our purpose-built equipment.">
           Équipés pour prendre en charge camionnettes et utilitaires lourds avec notre matériel adapté.
         </p>
       </div>
 
       <div class="service-card">
         <div class="service-icon">🌙</div>
-        <h3 data-fr="Service 24h/24 – 7j/7" data-nl="Dienst 24u/24 – 7d/7">Service 24h/24 – 7j/7</h3>
+        <h3 data-fr="Service 24h/24 – 7j/7" data-nl="Dienst 24u/24 – 7d/7" data-en="24/7 service">Service 24h/24 – 7j/7</h3>
         <p data-fr="Une urgence ne prévient pas. Nous intervenons à toute heure, y compris les nuits, week-ends et jours fériés."
-           data-nl="Een noodgeval kondigt zich niet aan. Wij komen op elk uur, ook 's nachts, in het weekend en op feestdagen.">
+           data-nl="Een noodgeval kondigt zich niet aan. Wij komen op elk uur, ook 's nachts, in het weekend en op feestdagen."
+           data-en="Emergencies don't wait. We respond at any hour, including nights, weekends and public holidays.">
           Une urgence ne prévient pas. Nous intervenons à toute heure, y compris les nuits, week-ends et jours fériés.
         </p>
       </div>
 
       <div class="service-card">
         <div class="service-icon">🅿️</div>
-        <h3 data-fr="Enlèvement de véhicule" data-nl="Voertuig verwijdering">Enlèvement de véhicule</h3>
+        <h3 data-fr="Enlèvement de véhicule" data-nl="Voertuig verwijdering" data-en="Vehicle removal">Enlèvement de véhicule</h3>
         <p data-fr="Enlèvement de véhicules gênants, épaves ou voitures non conformes sur votre propriété ou espace commun."
-           data-nl="Verwijdering van hinderlijke voertuigen, wrakken of niet-conforme wagens op uw eigendom of gemeenschappelijke ruimte.">
+           data-nl="Verwijdering van hinderlijke voertuigen, wrakken of niet-conforme wagens op uw eigendom of gemeenschappelijke ruimte."
+           data-en="Removal of obstructing vehicles, wrecks or non-compliant cars from your property or shared space.">
           Enlèvement de véhicules gênants, épaves ou voitures non conformes sur votre propriété ou espace commun.
         </p>
       </div>
 
       <div class="service-card">
         <div class="service-icon">📍</div>
-        <h3 data-fr="Zone de couverture large" data-nl="Ruim werkgebied">Zone de couverture large</h3>
+        <h3 data-fr="Zone de couverture large" data-nl="Ruim werkgebied" data-en="Wide coverage area">Zone de couverture large</h3>
         <p data-fr="Basés à Sint-Pieters-Leeuw, nous intervenons dans tout Bruxelles et sa périphérie rapidement et efficacement."
-           data-nl="Gevestigd in Sint-Pieters-Leeuw, actief in heel Brussel en de rand, snel en efficiënt.">
+           data-nl="Gevestigd in Sint-Pieters-Leeuw, actief in heel Brussel en de rand, snel en efficiënt."
+           data-en="Based in Sint-Pieters-Leeuw, we serve all of Brussels and the surrounding area quickly and efficiently.">
           Basés à Sint-Pieters-Leeuw, nous intervenons dans tout Bruxelles et sa périphérie rapidement et efficacement.
         </p>
       </div>
@@ -565,36 +605,36 @@
 <section class="section section-alt" id="galerie">
   <div class="container">
     <div class="center">
-      <span class="tag" data-fr="Galerie" data-nl="Galerij">Galerie</span>
-      <h2 data-fr="Nos interventions en images" data-nl="Onze interventies in beeld">Nos interventions en images</h2>
+      <span class="tag" data-fr="Galerie" data-nl="Galerij" data-en="Gallery">Galerie</span>
+      <h2 data-fr="Nos interventions en images" data-nl="Onze interventies in beeld" data-en="Our work in pictures">Nos interventions en images</h2>
     </div>
     <div class="gallery-grid">
       <div class="gallery-item wide">
         <img src="WhatsApp Image 2026-03-19 at 09.09.jpeg"
              alt="Camion de dépannage Alpha Dépannage remorquant un utilitaire" loading="lazy" />
         <div class="gallery-overlay">
-          <span data-fr="Remorquage camionnette – Bruxelles" data-nl="Bestelwagen slepen – Brussel">Remorquage camionnette – Bruxelles</span>
+          <span data-fr="Remorquage camionnette – Bruxelles" data-nl="Bestelwagen slepen – Brussel" data-en="Van towing – Brussels">Remorquage camionnette – Bruxelles</span>
         </div>
       </div>
       <div class="gallery-item">
         <img src="WhatsApp Image 2026-03-19 at 09.09.29.jpeg"
              alt="Intervention de nuit – Alpha Dépannage" loading="lazy" />
         <div class="gallery-overlay">
-          <span data-fr="Intervention de nuit" data-nl="Nachtelijke interventie">Intervention de nuit</span>
+          <span data-fr="Intervention de nuit" data-nl="Nachtelijke interventie" data-en="Night call-out">Intervention de nuit</span>
         </div>
       </div>
       <div class="gallery-item">
         <img src="WhatsApp Image 2026-03-19 at 09www.09.29.jpeg"
              alt="Remorquage voiture en ville" loading="lazy" />
         <div class="gallery-overlay">
-          <span data-fr="Remorquage en centre-ville" data-nl="Slepen in stadscentrum">Remorquage en centre-ville</span>
+          <span data-fr="Remorquage en centre-ville" data-nl="Slepen in stadscentrum" data-en="City centre towing">Remorquage en centre-ville</span>
         </div>
       </div>
       <div class="gallery-item wide">
         <img src="WhatsApp Image 2026-03-19 at ww09.09.29.jpeg"
              alt="Dépannage nuit hivernale" loading="lazy" />
         <div class="gallery-overlay">
-          <span data-fr="Intervention par conditions hivernales" data-nl="Interventie bij winteromstandigheden">Intervention par conditions hivernales</span>
+          <span data-fr="Intervention par conditions hivernales" data-nl="Interventie bij winteromstandigheden" data-en="Winter conditions call-out">Intervention par conditions hivernales</span>
         </div>
       </div>
     </div>
@@ -609,45 +649,47 @@
         <img src="WhatsApp Image 2026-03-19 at 09.09.jpeg" alt="Camion Alpha Dépannage" loading="lazy" />
         <div class="about-img-badge">
           <div class="big">24/7</div>
-          <div class="sm" data-fr="À votre service" data-nl="Voor u klaar">À votre service</div>
+          <div class="sm" data-fr="À votre service" data-nl="Voor u klaar" data-en="At your service">À votre service</div>
         </div>
       </div>
       <div class="about-content">
-        <span class="tag" data-fr="À propos de nous" data-nl="Over ons">À propos de nous</span>
-        <h2 data-fr="Votre partenaire de confiance en cas de panne" data-nl="Uw vertrouwde partner bij autopech">
+        <span class="tag" data-fr="À propos de nous" data-nl="Over ons" data-en="About us">À propos de nous</span>
+        <h2 data-fr="Votre partenaire de confiance en cas de panne" data-nl="Uw vertrouwde partner bij autopech" data-en="Your trusted partner when you break down">
           Votre partenaire de confiance en cas de panne
         </h2>
         <p data-fr="Alpha Dépannage est une société spécialisée dans le dépannage et le remorquage de véhicules, basée à Sint-Pieters-Leeuw. Grâce à notre équipement moderne et notre équipe expérimentée, nous intervenons partout à Bruxelles et dans sa périphérie."
-           data-nl="Alpha Dépannage is een gespecialiseerd bedrijf in pech- en takelhulp voor voertuigen, gevestigd in Sint-Pieters-Leeuw. Met onze moderne uitrusting en ervaren team zijn wij actief in heel Brussel en omgeving.">
+           data-nl="Alpha Dépannage is een gespecialiseerd bedrijf in pech- en takelhulp voor voertuigen, gevestigd in Sint-Pieters-Leeuw. Met onze moderne uitrusting en ervaren team zijn wij actief in heel Brussel en omgeving."
+           data-en="Alpha Dépannage is a specialist breakdown and vehicle recovery company based in Sint-Pieters-Leeuw. With our modern equipment and experienced team we cover all of Brussels and the surrounding area.">
           Alpha Dépannage est une société spécialisée dans le dépannage et le remorquage de véhicules, basée à Sint-Pieters-Leeuw. Grâce à notre équipement moderne et notre équipe expérimentée, nous intervenons partout à Bruxelles et dans sa périphérie.
         </p>
         <p data-fr="Notre priorité : votre sécurité et votre tranquillité d'esprit, 7 jours sur 7, 24 heures sur 24."
-           data-nl="Onze prioriteit: uw veiligheid en gemoedsrust, 7 dagen op 7, 24 uur op 24.">
+           data-nl="Onze prioriteit: uw veiligheid en gemoedsrust, 7 dagen op 7, 24 uur op 24."
+           data-en="Our priority: your safety and peace of mind, 7 days a week, 24 hours a day.">
           Notre priorité : votre sécurité et votre tranquillité d'esprit, 7 jours sur 7, 24 heures sur 24.
         </p>
         <ul class="check-list">
           <li>
             <span class="check-icon">✔</span>
-            <span data-fr="Matériel professionnel et moderne" data-nl="Professioneel en modern materieel">Matériel professionnel et moderne</span>
+            <span data-fr="Matériel professionnel et moderne" data-nl="Professioneel en modern materieel" data-en="Professional and modern equipment">Matériel professionnel et moderne</span>
           </li>
           <li>
             <span class="check-icon">✔</span>
-            <span data-fr="Équipe expérimentée et qualifiée" data-nl="Ervaren en gekwalificeerd team">Équipe expérimentée et qualifiée</span>
+            <span data-fr="Équipe expérimentée et qualifiée" data-nl="Ervaren en gekwalificeerd team" data-en="Experienced and qualified team">Équipe expérimentée et qualifiée</span>
           </li>
           <li>
             <span class="check-icon">✔</span>
-            <span data-fr="Intervention rapide (~30 min)" data-nl="Snelle interventie (~30 min)">Intervention rapide (~30 min)</span>
+            <span data-fr="Intervention rapide (~30 min)" data-nl="Snelle interventie (~30 min)" data-en="Fast response (~30 min)">Intervention rapide (~30 min)</span>
           </li>
           <li>
             <span class="check-icon">✔</span>
-            <span data-fr="Tous types de véhicules acceptés" data-nl="Alle soorten voertuigen aanvaard">Tous types de véhicules acceptés</span>
+            <span data-fr="Tous types de véhicules acceptés" data-nl="Alle soorten voertuigen aanvaard" data-en="All vehicle types accepted">Tous types de véhicules acceptés</span>
           </li>
           <li>
             <span class="check-icon">✔</span>
-            <span data-fr="Disponible nuits, week-ends & fériés" data-nl="Beschikbaar 's nachts, weekends & feestdagen">Disponible nuits, week-ends & fériés</span>
+            <span data-fr="Disponible nuits, week-ends & fériés" data-nl="Beschikbaar 's nachts, weekends & feestdagen" data-en="Available nights, weekends & public holidays">Disponible nuits, week-ends & fériés</span>
           </li>
         </ul>
-        <a href="tel:0477509327" class="btn btn-red" data-fr="📞 Nous contacter" data-nl="📞 Neem contact op">📞 Nous contacter</a>
+        <a href="tel:0477509327" class="btn btn-red" data-fr="📞 Nous contacter" data-nl="📞 Neem contact op" data-en="📞 Contact us">📞 Nous contacter</a>
       </div>
     </div>
   </div>
@@ -656,9 +698,10 @@
 <!-- ═══════════════ CTA BANNER ═══════════════ -->
 <div class="cta-banner">
   <div class="container" style="position:relative;z-index:1;">
-    <h2 data-fr="Besoin d'aide ? Appelez-nous maintenant !" data-nl="Hulp nodig? Bel ons nu!">Besoin d'aide ? Appelez-nous maintenant !</h2>
+    <h2 data-fr="Besoin d'aide ? Appelez-nous maintenant !" data-nl="Hulp nodig? Bel ons nu!" data-en="Need help? Call us now!">Besoin d'aide ? Appelez-nous maintenant !</h2>
     <p data-fr="Nous sommes disponibles 24h/24, 7j/7. Une équipe prête à intervenir en 30 minutes."
-       data-nl="Wij zijn beschikbaar 24u/24, 7d/7. Een team klaar om binnen 30 minuten ter plaatse te zijn.">
+       data-nl="Wij zijn beschikbaar 24u/24, 7d/7. Een team klaar om binnen 30 minuten ter plaatse te zijn."
+       data-en="We are available 24/7. A team ready to reach you within 30 minutes.">
       Nous sommes disponibles 24h/24, 7j/7. Une équipe prête à intervenir en 30 minutes.
     </p>
     <span class="cta-phone"><a href="tel:0477509327">0477 50 93 27</a></span>
@@ -671,17 +714,17 @@
 <section class="section section-alt" id="contact">
   <div class="container">
     <div class="center">
-      <span class="tag" data-fr="Contact" data-nl="Contact">Contact</span>
-      <h2 data-fr="Nous trouver & nous contacter" data-nl="Ons vinden & contacteren">Nous trouver & nous contacter</h2>
+      <span class="tag" data-fr="Contact" data-nl="Contact" data-en="Contact">Contact</span>
+      <h2 data-fr="Nous trouver & nous contacter" data-nl="Ons vinden & contacteren" data-en="Find us & get in touch">Nous trouver & nous contacter</h2>
     </div>
     <div class="contact-grid">
       <div class="contact-card">
-        <h3 data-fr="Informations de contact" data-nl="Contactgegevens">Informations de contact</h3>
+        <h3 data-fr="Informations de contact" data-nl="Contactgegevens" data-en="Contact information">Informations de contact</h3>
 
         <div class="contact-info-item">
           <div class="contact-icon">📞</div>
           <div>
-            <div class="label" data-fr="Téléphone" data-nl="Telefoon">Téléphone</div>
+            <div class="label" data-fr="Téléphone" data-nl="Telefoon" data-en="Phone">Téléphone</div>
             <div class="value"><a href="tel:0477509327">0477 50 93 27</a></div>
           </div>
         </div>
@@ -689,7 +732,7 @@
         <div class="contact-info-item">
           <div class="contact-icon">📍</div>
           <div>
-            <div class="label" data-fr="Adresse" data-nl="Adres">Adresse</div>
+            <div class="label" data-fr="Adresse" data-nl="Adres" data-en="Address">Adresse</div>
             <div class="value">Brusselbaan 126<br>1600 Sint-Pieters-Leeuw</div>
           </div>
         </div>
@@ -697,23 +740,62 @@
         <div class="contact-info-item">
           <div class="contact-icon">🕐</div>
           <div>
-            <div class="label" data-fr="Horaires" data-nl="Openingstijden">Horaires</div>
-            <div class="value" data-fr="7j/7 – 24h/24" data-nl="7d/7 – 24u/24">7j/7 – 24h/24</div>
+            <div class="label" data-fr="Horaires" data-nl="Openingstijden" data-en="Hours">Horaires</div>
+            <div class="value" data-fr="7j/7 – 24h/24" data-nl="7d/7 – 24u/24" data-en="7d/7 – 24h/24">7j/7 – 24h/24</div>
           </div>
         </div>
 
         <div class="contact-info-item">
           <div class="contact-icon">🚗</div>
           <div>
-            <div class="label" data-fr="Zone d'intervention" data-nl="Werkgebied">Zone d'intervention</div>
-            <div class="value" data-fr="Bruxelles & périphérie" data-nl="Brussel & rand">Bruxelles & périphérie</div>
+            <div class="label" data-fr="Zone d'intervention" data-nl="Werkgebied" data-en="Coverage area">Zone d'intervention</div>
+            <div class="value" data-fr="Bruxelles & périphérie" data-nl="Brussel & rand" data-en="Brussels & surroundings">Bruxelles & périphérie</div>
           </div>
         </div>
 
         <a href="tel:0477509327" class="btn btn-red" style="width:100%;justify-content:center;margin-top:8px;"
-           data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu">📞 Appeler maintenant</a>
+           data-fr="📞 Appeler maintenant" data-nl="📞 Bel nu" data-en="📞 Call now">📞 Appeler maintenant</a>
       </div>
 
+      <!-- Contact form -->
+      <div class="contact-card">
+        <h3 data-fr="Envoyer un message" data-nl="Stuur een bericht" data-en="Send a message">Envoyer un message</h3>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cf-name" data-fr="Nom *" data-nl="Naam *" data-en="Name *">Nom *</label>
+              <input type="text" id="cf-name" name="name" required
+                     data-placeholder-fr="Votre nom" data-placeholder-nl="Uw naam" data-placeholder-en="Your name"
+                     placeholder="Votre nom" />
+            </div>
+            <div class="form-group">
+              <label for="cf-phone" data-fr="Téléphone" data-nl="Telefoon" data-en="Phone">Téléphone</label>
+              <input type="tel" id="cf-phone" name="phone"
+                     data-placeholder-fr="0477 00 00 00" data-placeholder-nl="0477 00 00 00" data-placeholder-en="0477 00 00 00"
+                     placeholder="0477 00 00 00" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cf-email" data-fr="Email *" data-nl="E-mail *" data-en="Email *">Email *</label>
+            <input type="email" id="cf-email" name="email" required
+                   data-placeholder-fr="votre@email.com" data-placeholder-nl="uw@email.com" data-placeholder-en="your@email.com"
+                   placeholder="votre@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="cf-msg" data-fr="Message *" data-nl="Bericht *" data-en="Message *">Message *</label>
+            <textarea id="cf-msg" name="message" required
+                      data-placeholder-fr="Décrivez votre situation…" data-placeholder-nl="Beschrijf uw situatie…" data-placeholder-en="Describe your situation…"
+                      placeholder="Décrivez votre situation…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-red form-submit"
+                  data-fr="✉️ Envoyer le message" data-nl="✉️ Bericht verzenden" data-en="✉️ Send message">
+            ✉️ Envoyer le message
+          </button>
+          <div class="form-status" id="formStatus"></div>
+        </form>
+      </div>
+
+      <!-- Map -->
       <div class="map-container">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.9!2d4.2598!3d50.7693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c8c5c5c5c5c5%3A0x0!2sBrusselban+126%2C+1600+Sint-Pieters-Leeuw!5e0!3m2!1sfr!2sbe!4v1700000000000!5m2!1sfr!2sbe"
@@ -734,7 +816,7 @@
           <img src="logo.jpeg" alt="Alpha Dépannage logo" />
           <div>
             <div class="name">Alpha Dépannage</div>
-            <div class="sub" data-fr="Dépannage & Remorquage" data-nl="Pech- & Takeldienst">Dépannage & Remorquage</div>
+            <div class="sub" data-fr="Dépannage & Remorquage" data-nl="Pech- & Takeldienst" data-en="Breakdown & Recovery">Dépannage & Remorquage</div>
           </div>
         </div>
         <p class="footer-desc"
@@ -745,17 +827,17 @@
       </div>
 
       <div class="footer-col">
-        <h4 data-fr="Navigation" data-nl="Navigatie">Navigation</h4>
+        <h4 data-fr="Navigation" data-nl="Navigatie" data-en="Navigation">Navigation</h4>
         <ul>
-          <li><a href="#services" data-fr="Services"  data-nl="Diensten">Services</a></li>
-          <li><a href="#galerie"  data-fr="Galerie"   data-nl="Galerij">Galerie</a></li>
-          <li><a href="#a-propos" data-fr="À propos"  data-nl="Over ons">À propos</a></li>
-          <li><a href="#contact"  data-fr="Contact"   data-nl="Contact">Contact</a></li>
+          <li><a href="#services" data-fr="Services"  data-nl="Diensten" data-en="Services">Services</a></li>
+          <li><a href="#galerie"  data-fr="Galerie"   data-nl="Galerij" data-en="Gallery">Galerie</a></li>
+          <li><a href="#a-propos" data-fr="À propos"  data-nl="Over ons" data-en="About">À propos</a></li>
+          <li><a href="#contact"  data-fr="Contact"   data-nl="Contact" data-en="Contact">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4 data-fr="Contact" data-nl="Contact">Contact</h4>
+        <h4 data-fr="Contact" data-nl="Contact" data-en="Contact">Contact</h4>
         <div class="footer-contact-item">
           <span class="ico">📞</span>
           <a href="tel:0477509327" style="color:var(--yellow);">0477 50 93 27</a>
@@ -766,13 +848,13 @@
         </div>
         <div class="footer-contact-item">
           <span class="ico">🕐</span>
-          <span data-fr="Disponible 24h/24 – 7j/7" data-nl="Beschikbaar 24u/24 – 7d/7">Disponible 24h/24 – 7j/7</span>
+          <span data-fr="Disponible 24h/24 – 7j/7" data-nl="Beschikbaar 24u/24 – 7d/7" data-en="Available 24/7">Disponible 24h/24 – 7j/7</span>
         </div>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span data-fr="© 2026 Alpha Dépannage – Tous droits réservés" data-nl="© 2026 Alpha Dépannage – Alle rechten voorbehouden">
+      <span data-fr="© 2026 Alpha Dépannage – Tous droits réservés" data-nl="© 2026 Alpha Dépannage – Alle rechten voorbehouden" data-en="© 2026 Alpha Dépannage – All rights reserved">
         © 2026 Alpha Dépannage – Tous droits réservés
       </span>
       <span data-fr="Brusselbaan 126, 1600 Sint-Pieters-Leeuw" data-nl="Brusselbaan 126, 1600 Sint-Pieters-Leeuw">
@@ -794,11 +876,10 @@
     currentLang = lang;
     document.documentElement.lang = lang;
 
-    // Update all elements with data-fr / data-nl
-    document.querySelectorAll('[data-fr],[data-nl]').forEach(el => {
+    // Update all elements with data-fr / data-nl / data-en
+    document.querySelectorAll('[data-fr],[data-nl],[data-en]').forEach(el => {
       const val = el.getAttribute('data-' + lang);
       if (val !== null) {
-        // Check if value contains HTML tags
         if (/<[a-z][\s\S]*>/i.test(val)) {
           el.innerHTML = val;
         } else {
@@ -810,6 +891,11 @@
     // Update lang buttons
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
+      el.placeholder = el.getAttribute('data-placeholder-' + lang);
     });
   }
 
@@ -833,6 +919,48 @@
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';
     observer.observe(el);
+  });
+
+  /* ── Contact form ── */
+  const msgs = {
+    fr: { ok: '✅ Message envoyé ! Nous vous répondrons rapidement.', err: '❌ Une erreur est survenue. Veuillez réessayer ou appeler le 0477 50 93 27.' },
+    nl: { ok: '✅ Bericht verzonden! We antwoorden zo snel mogelijk.', err: '❌ Er is een fout opgetreden. Probeer opnieuw of bel 0477 50 93 27.' },
+    en: { ok: '✅ Message sent! We will get back to you shortly.',     err: '❌ Something went wrong. Please try again or call 0477 50 93 27.' }
+  };
+
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn    = this.querySelector('button[type="submit"]');
+    const status = document.getElementById('formStatus');
+    const lang   = currentLang;
+
+    btn.disabled = true;
+    btn.style.opacity = '.7';
+    status.className = 'form-status';
+    status.textContent = '';
+
+    const data = new FormData(this);
+
+    try {
+      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        status.textContent = msgs[lang].ok;
+        status.className = 'form-status success';
+        this.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      status.textContent = msgs[lang].err;
+      status.className = 'form-status error';
+    } finally {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
   });
 </script>
 
