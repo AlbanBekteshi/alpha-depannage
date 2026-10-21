@@ -955,7 +955,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const data = new FormData(this);
 
     try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const res = await fetch('contact.php', {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
